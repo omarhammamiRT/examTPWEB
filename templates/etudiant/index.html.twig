@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Student List{% endblock %}
+
+{% block body %}
+    <table class="table">
+        <th>id</th>
+        <th>nom</th>
+        <th>prenom</th>
+        <th>section</th>
+        <th>action</th>
+        {% for item in data %}
+            {%if loop.index % 2 ==1 %}
+                <tr  class="table-primary" onclick="change(this,'table-primary')">
+            {%else%}
+                <tr  class="table-warning" onclick="change(this,'table-warning')">
+            {%endif%}
+            <td >{{item.id}}</td>
+            <td >{{item.nom}}</td>
+            <td >{{item.prenom}}</td>
+            <td >{%if item.section == null %}
+                    Student don't have any section
+                {%else%} {{item.section}} {%endif%}</td>
+            <td><a href="{{ path('delete', {id: item.id}) }}">Delete</a>    <a href="{{ path('edit', {id: item.id}) }}">Edit</a> </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}
